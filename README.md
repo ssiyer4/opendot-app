@@ -3,4 +3,6 @@ Repo for the coding and testing of OpenDot, our Information Systems and Programm
 
 Gotcha, update from Hao Yi :)
 
-Nada can push! :~) !!
+Nada can push! :~)
+
+nat can push
