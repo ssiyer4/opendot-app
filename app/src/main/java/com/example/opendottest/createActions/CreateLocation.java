@@ -1,6 +1,7 @@
 package com.example.opendottest.createActions;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -8,38 +9,53 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.opendottest.R;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.RectangularBounds;
+import com.google.android.libraries.places.api.net.FetchPlaceResponse;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
- * copied from youtube tutorial's git repo!
+ * Created by User on 10/2/2017.
  */
 
 public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
@@ -81,11 +97,13 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
+    private Button AddLocationButton;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_location);
-        mSearchText = (EditText) findViewById(R.id.input_search);
+
         mGps = (ImageView) findViewById(R.id.ic_gps);
 
         getLocationPermission();
@@ -95,22 +113,7 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
     private void init(){
         Log.d(TAG, "init: initializing");
 
-        mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if(actionId == EditorInfo.IME_ACTION_SEARCH
-                        || actionId == EditorInfo.IME_ACTION_DONE
-                        || keyEvent.getAction() == KeyEvent.ACTION_DOWN
-                        || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER){
-
-                    //execute our method for searching
-                    geoLocate();
-                }
-
-                return false;
-            }
-        });
-
+        // GPS icon //
         mGps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,13 +122,35 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
             }
         });
 
+        /*
+        // ADD LOCATION button popup menu //
+        // reference & initialize button
+        AddLocationButton = (Button) findViewById(R.id.btn_login);
+        AddLocationButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceType")
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(CreateLocation.this, AddLocationButton);
+                // inflating menu from button
+                popupMenu.getMenuInflater().inflate(R.layout.popup_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        Toast.makeText(CreateLocation.this, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+                popupMenu.show();
+            }
+        });*/
+
         hideSoftKeyboard();
     }
 
-    private void geoLocate(){
+    private void geoLocate(String searchString){
         Log.d(TAG, "geoLocate: geolocating");
 
-        String searchString = mSearchText.getText().toString();
+        //String searchString = mSearchText.getText().toString();
 
         Geocoder geocoder = new Geocoder(CreateLocation.this);
         List<Address> list = new ArrayList<>();
@@ -141,7 +166,7 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
             Log.d(TAG, "geoLocate: found a location: " + address.toString());
             //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
 
-            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM,
+            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), 16,
                     address.getAddressLine(0));
         }
     }
@@ -194,10 +219,62 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
     }
 
     private void initMap(){
+
+
         Log.d(TAG, "initMap: initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        // Get the SupportMapFragment and request notification when the map is ready to be used
+
+        setupAutoCompleteFragment();
 
         mapFragment.getMapAsync(CreateLocation.this);
+    }
+
+    /// AUTOCOMPLETE SUGGESTIONS ///
+    // sample codes from https://developers.google.com/maps/documentation/places/android-sdk/autocomplete
+    private void setupAutoCompleteFragment(){
+        // Initialize SDK
+        String apiKey = getString(R.string.api_key); //api_key in strings.xml
+
+        if(!Places.isInitialized()){
+            Places.initialize(getApplicationContext(),apiKey);
+        }
+
+        PlacesClient placesClient = Places.createClient(this);
+
+
+        // Initialize the AutocompleteSupportFragment.
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+
+
+        // Specify the types of place data to return (singapore)
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+
+        autocompleteFragment.setLocationBias(RectangularBounds.newInstance(
+                new LatLng(1.290270,103.851959),
+                new LatLng(1.290270,103.851959)
+        ));
+
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            // * Information window here that shows photos/reviews?
+            public void onPlaceSelected(@NonNull Place place) {
+                // get name of the stupid place and then locate it
+                geoLocate(place.getName());
+                Log.i(TAG, "PLACE NAME: " + place.getName() );
+
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+                // TODO: Handle the error.
+                Log.e("Error", status.getStatusMessage());
+                //Log.i(TAG, "An error occurred: " + status);
+            }
+        });
+
     }
 
     private void getLocationPermission(){
@@ -225,6 +302,7 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Log.d(TAG, "onRequestPermissionsResult: called.");
         mLocationPermissionsGranted = false;
 
@@ -252,6 +330,7 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
     }
 
 }
+
 
 
 

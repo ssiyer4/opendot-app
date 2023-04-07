@@ -4,17 +4,16 @@
 wip needs to have exit button enabled and add location logic added as well-->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/map"
-        tools:context=".MapsActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment" />
+        tools:context=".MapsActivity" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,6 +21,7 @@ wip needs to have exit button enabled and add location logic added as well-->
         android:orientation="vertical">
 
 
+        <!-- heading -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,55 +55,37 @@ wip needs to have exit button enabled and add location logic added as well-->
 
 
 
-
-
+            <!-- search bar -->
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginLeft="24dp"
-                android:elevation="10dp"
-                android:background="@drawable/search_bg"
+                android:layout_height="wrap_content"
                 android:id="@+id/relLayout1">
 
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:id="@+id/ic_search"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_search"
-                    />
-
-                <EditText
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toRightOf="@id/ic_search"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"
-                    android:id="@+id/input_search"
-                    android:background="@null"
-                    android:hint="Enter Location"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:imeOptions="actionSearch"
-                    />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:elevation="10dp"
+                    android:background="@drawable/search_bg"
+                    >
+
+                    <fragment
+                        android:id="@+id/autocomplete_fragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                        />
+
+                </androidx.cardview.widget.CardView>
 
             </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
-                android:layout_height="4dp"
-                android:background="@color/coral"/>
 
         </LinearLayout>
 
 
-
+        <!-- gps -->
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -118,23 +100,25 @@ wip needs to have exit button enabled and add location logic added as well-->
 
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="@drawable/rounded_corner"
+            android:text="Add Location"
+            android:textSize="16dp"
+            android:textColor="@android:color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="16dp"
+            />
 
-
-
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
-        android:background="@drawable/rounded_corner"
-        android:text="Add Location"
-        android:textSize="16dp"
-        android:textColor="@android:color/white"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="16dp"
-        />
+    </RelativeLayout>
 
 
 
