@@ -4,6 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginPage">
+    android:background="#F5F1EA"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/opendotLogoLoginPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="216dp"
+        android:src="@drawable/opendot_logo_transp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/opendotTaglineLoginPage"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/opendotTaglineLoginPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connecting the Dots"
+        android:textColor="#303030"
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.29" />
+
+    <EditText
+        android:id="@+id/usernameemailLoginPage"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="55dp"
+        android:drawableLeft="@drawable/user_icon"
+        android:gravity="center"
+        android:hint="Username/Email ID"
+        android:textColor="#738793"
+        android:textColorHint="#738793"
+        app:layout_constraintBottom_toTopOf="@+id/passwordLoginPage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/opendotTaglineLoginPage"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/passwordLoginPage"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="55dp"
+        android:layout_marginEnd="44dp"
+        android:drawableLeft="@drawable/password_icon"
+        android:gravity="center"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="#738793"
+        android:textColorHint="#738793"
+        app:layout_constraintBottom_toTopOf="@+id/loginButtonLoginPage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/opendotTaglineLoginPage" />
+
+    <Button
+        android:id="@+id/loginButtonLoginPage"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#E76964"
+        android:text="Log In"
+        android:textColor="#F5F1EA"
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordLoginPage" />
+
+    <TextView
+        android:id="@+id/backClickableTVLoginPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/back_arrow"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginButtonLoginPage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

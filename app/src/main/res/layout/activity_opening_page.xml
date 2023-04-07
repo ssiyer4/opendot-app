@@ -1,9 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#F5F1EA"
     tools:context=".OpeningPage">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/opendotLogoOpenPage"
+        android:layout_width="match_parent"
+        android:layout_height="227dp"
+        android:src="@drawable/opendot_logo_transp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        />
+
+    <TextView
+        android:id="@+id/opendotTaglineOpenPage"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="Connecting the Dots"
+        android:textColor="#303030"
+        android:typeface="sans" />
+
+    <Button
+        android:id="@+id/loginButtonOpenPage"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#E76964"
+        android:text="@string/log_in"
+        android:textColor="#F5F1EA"
+        android:typeface="sans"
+        />
+    <Button
+        android:id="@+id/registerButtonOpenPage"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#E76964"
+        android:text="@string/register"
+        android:textColor="#F5F1EA"
+        android:typeface="sans"
+        />
+
+
+</LinearLayout>

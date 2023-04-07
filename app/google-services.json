@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "360786992740",
+    "project_id": "opendot-yay",
+    "storage_bucket": "opendot-yay.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360786992740:android:5e9fdbc408ba50ef134971",
+        "android_client_info": {
+          "package_name": "com.example.opendot_v1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "360786992740-488h4m9d9cmg0jt5amoim80kdqffj8ns.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnptIKG2LIF7nMQKzyYv_VoZMzmfZMQgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "360786992740-488h4m9d9cmg0jt5amoim80kdqffj8ns.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
