@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+this is not supposed to be main activity,
+but just for the pop up menu for create
+not sure how to make this layover previous pages though-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".createActions.CreateMenu">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/bottom_menu_bg">
+        <!-- TODO: move down; this is supposed to be at the bottom but for now we put it here bc its same as nav bar -->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:id="@+id/ic_close"
+                android:src="@drawable/ic_close"
+                />
+
+            <!-- how to make the text center?-->
+
+            <TextView
+                android:id="@+id/text_view_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textSize="24sp"
+                android:textColor="@color/dark_gray"
+                android:text="Create Now"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false"
+            android:id="@+id/button3"
+            android:layout_marginBottom="16dp">
+
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="96dp"
+                android:layout_weight="1"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="Review"
+                android:id="@+id/btnReview"/>
+
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="96dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Location"
+                android:id="@+id/btnMap"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="96dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="Collection"
+                android:id="@+id/btnCollection"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+    
+
+</RelativeLayout>
