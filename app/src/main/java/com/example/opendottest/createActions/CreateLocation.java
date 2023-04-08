@@ -27,6 +27,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.opendottest.Close;
 import com.example.opendottest.R;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -101,10 +102,15 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
 
     private Button AddLocationButton;
 
+    private ImageView closeButton;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_location);
+
+        closeButton = (ImageView) findViewById(R.id.ic_close);
+
+        Close.setCloseButton(closeButton, this);
 
         mGps = (ImageView) findViewById(R.id.ic_gps);
 

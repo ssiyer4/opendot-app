@@ -7,10 +7,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.opendottest.Close;
 import com.example.opendottest.R;
 import com.example.opendottest.Review;
 import com.example.opendottest.navBar;
@@ -22,10 +24,14 @@ public class CreateMenu extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOGUE_REQUEST = 9001;
 
+    private ImageView closeButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_menu);
+        closeButton = (ImageView) findViewById(R.id.ic_close);
+        Close.setCloseButton(closeButton, this);
 
         if (isServicesOK()){
             init();
