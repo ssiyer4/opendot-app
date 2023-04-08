@@ -2,6 +2,7 @@ package com.example.opendottest.createActions;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -16,6 +17,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
@@ -139,12 +141,12 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
                             case R.id.new_collection:
                                 setContentView(R.layout.create_collection);
                                 return true;
-                            //case R.id.existing_collection:
-                                //if ()
+                            /*case R.id.existing_collection:
+                            // if search bar has no place, toast 'please provide a valid location'
+                                if () {
+                                }*/
                             default:
-                                return false; // **haven't figure out
-                            // if search bar has no place, toast 'please provide a location'
-
+                                return false;
                         }
                     }
                 });
@@ -235,6 +237,7 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
         setupAutoCompleteFragment();
 
         mapFragment.getMapAsync(CreateLocation.this);
+
     }
 
     /// AUTOCOMPLETE SUGGESTIONS ///
