@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.opendottest.R;
+import com.example.opendottest.Review;
 import com.example.opendottest.navBar;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -49,7 +50,7 @@ public class CreateMenu extends AppCompatActivity {
         btnReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CreateMenu.this,CreateReview.class);
+                Intent intent = new Intent(CreateMenu.this, Review.class);
                 startActivity(intent);
             }
         });
