@@ -122,7 +122,6 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
             }
         });
 
-        /*
         // ADD LOCATION button popup menu //
         // reference & initialize button
         AddLocationButton = (Button) findViewById(R.id.btn_login);
@@ -132,25 +131,33 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
             public void onClick(View view) {
                 PopupMenu popupMenu = new PopupMenu(CreateLocation.this, AddLocationButton);
                 // inflating menu from button
-                popupMenu.getMenuInflater().inflate(R.layout.popup_menu, popupMenu.getMenu());
+                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        Toast.makeText(CreateLocation.this, "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
-                        return true;
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.new_collection:
+                                setContentView(R.layout.create_collection);
+                                return true;
+                            //case R.id.existing_collection:
+                                //if ()
+                            default:
+                                return false; // **haven't figure out
+                            // if search bar has no place, toast 'please provide a location'
+
+                        }
                     }
                 });
                 popupMenu.show();
             }
-        });*/
+
+        });
 
         hideSoftKeyboard();
     }
 
     private void geoLocate(String searchString){
         Log.d(TAG, "geoLocate: geolocating");
-
-        //String searchString = mSearchText.getText().toString();
 
         Geocoder geocoder = new Geocoder(CreateLocation.this);
         List<Address> list = new ArrayList<>();
@@ -259,19 +266,16 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
-            // * Information window here that shows photos/reviews?
             public void onPlaceSelected(@NonNull Place place) {
                 // get name of the stupid place and then locate it
                 geoLocate(place.getName());
                 Log.i(TAG, "PLACE NAME: " + place.getName() );
-
             }
 
             @Override
             public void onError(@NonNull Status status) {
-                // TODO: Handle the error.
+                // Handle the error.
                 Log.e("Error", status.getStatusMessage());
-                //Log.i(TAG, "An error occurred: " + status);
             }
         });
 

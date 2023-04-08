@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/existing_collection"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginVertical="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:title="Add to Existing Collection"
+        android:gravity="center"
+        android:textSize="19sp"
+        android:textColor="@color/black"
+        />
+
+    <item
+        android:id="@+id/new_collection"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:title="Create New Collection..."
+        android:layout_marginVertical="90dp"
+        android:gravity="center"
+        android:textSize="19sp"
+        android:textColor="@color/black"
+        />
+
+</menu>
