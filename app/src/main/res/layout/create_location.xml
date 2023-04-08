@@ -123,6 +123,7 @@ wip needs to have exit button enabled and add location logic added as well-->
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_marginBottom="16dp"
+            android:clickable="true"
             />
 
     </RelativeLayout>
