@@ -56,7 +56,7 @@ public class CreateMenu extends AppCompatActivity {
         btnReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CreateMenu.this, Review.class);
+                Intent intent = new Intent(CreateMenu.this, CreateReview.class);
                 startActivity(intent);
             }
         });

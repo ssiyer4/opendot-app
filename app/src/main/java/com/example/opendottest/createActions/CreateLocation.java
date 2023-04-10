@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -164,7 +165,7 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
         hideSoftKeyboard();
     }
 
-    private void geoLocate(String searchString){
+    public void geoLocate(String searchString){
         Log.d(TAG, "geoLocate: geolocating");
 
         Geocoder geocoder = new Geocoder(CreateLocation.this);
@@ -248,7 +249,9 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
 
     /// AUTOCOMPLETE SUGGESTIONS ///
     // sample codes from https://developers.google.com/maps/documentation/places/android-sdk/autocomplete
-    private void setupAutoCompleteFragment(){
+
+
+    public void setupAutoCompleteFragment(){
         // Initialize SDK
         String apiKey = getString(R.string.api_key); //api_key in strings.xml
 

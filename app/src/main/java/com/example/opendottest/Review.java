@@ -38,7 +38,6 @@ public class Review extends AppCompatActivity {
         //instantiate layout XML file into corresponding View Objects
         //retrieve a standard LayoutInflator() instance that is already hooked up to the current context
         setContentView(binding.getRoot());
-        //
 
         binding.selectImagebtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -40,7 +40,7 @@ wip needs to have exit button enabled and add location logic added as well-->
                     android:layout_height="32dp"
                     android:layout_marginLeft="8dp"
                     android:src="@drawable/ic_close"
-                    android:clickable="true"/>
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
