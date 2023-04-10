@@ -117,7 +117,11 @@ public class CreateReview extends CreateMenu {
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
-                // get name of the stupid place and then enter it
+                // pass the place name to review.java
+                /*Intent intent = new Intent(CreateReview.this, Review.class);
+                intent.putExtra("place", place.getName());
+                Log.d("name", place.getName());
+                startActivity(intent); */
                 Intent intent = new Intent(CreateReview.this, Review.class);
                 startActivity(intent);
             }

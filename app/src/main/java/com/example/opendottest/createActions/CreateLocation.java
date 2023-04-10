@@ -3,6 +3,7 @@ package com.example.opendottest.createActions;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -28,8 +29,10 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.opendottest.AddLocation;
 import com.example.opendottest.Close;
 import com.example.opendottest.R;
+import com.example.opendottest.Review;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -39,6 +42,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -131,37 +135,6 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
             }
         });
 
-        // ADD LOCATION button popup menu //
-        // reference & initialize button
-        AddLocationButton = (Button) findViewById(R.id.btn_login);
-        AddLocationButton.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceType")
-            @Override
-            public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(CreateLocation.this, AddLocationButton);
-                // inflating menu from button
-                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.new_collection:
-                                setContentView(R.layout.create_collection);
-                                return true;
-                            /*case R.id.existing_collection:
-                            // if search bar has no place, toast 'please provide a valid location'
-                                if () {
-                                }*/
-                            default:
-                                return false;
-                        }
-                    }
-                });
-                popupMenu.show();
-            }
-
-        });
-
         hideSoftKeyboard();
     }
 
@@ -245,11 +218,33 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
 
         mapFragment.getMapAsync(CreateLocation.this);
 
+        // put click add location here //
+        // ADD LOCATION button //
+        // reference & initialize button
+        AddLocationButton = (Button) findViewById(R.id.btn_login);
+        AddLocationButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceType")
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(CreateLocation.this, AddLocation.class);
+                intent.putExtra("name", NewLocationName);
+                intent.putExtra("coordinates", NewLocationCoordinates);
+                startActivity(intent);
+
+            }
+
+        });
+
+
     }
 
     /// AUTOCOMPLETE SUGGESTIONS ///
     // sample codes from https://developers.google.com/maps/documentation/places/android-sdk/autocomplete
 
+    private String NewLocationName;
+
+    private LatLng NewLocationCoordinates;
 
     public void setupAutoCompleteFragment(){
         // Initialize SDK
@@ -281,7 +276,10 @@ public class CreateLocation extends CreateMenu implements OnMapReadyCallback {
             public void onPlaceSelected(@NonNull Place place) {
                 // get name of the stupid place and then locate it
                 geoLocate(place.getName());
+                NewLocationCoordinates = (LatLng) place.getLatLng();
+                NewLocationName = (String) place.getName();
                 Log.i(TAG, "PLACE NAME: " + place.getName() );
+
             }
 
             @Override

@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.example.opendottest.createActions.CreateReview;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,10 +35,28 @@ public class Review extends AppCompatActivity {
     StorageReference storageReference;
     ProgressDialog progressDialog;
 
+    private TextView enteredName;
+
+    private String passedName;
+
+    String[] categories = { "To eat", "To see", "To do"};
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) { //onCreateBundle is where you initialize your Activity
         //onCreate is the first of the method calls
         super.onCreate(savedInstanceState);
+
+        // Passing place name from create review
+
+        /*
+        enteredName = (TextView) findViewById(R.id.set_name);
+        Log.d("entered", enteredName.toString());
+        passedName = getIntent().getExtras().getString("place");
+        enteredName.setText(passedName);
+        */
+
+
         binding = ReviewBinding.inflate(getLayoutInflater());
         //instantiate layout XML file into corresponding View Objects
         //retrieve a standard LayoutInflator() instance that is already hooked up to the current context
