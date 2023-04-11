@@ -12,5 +12,9 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+<<<<<<< HEAD
 rootProject.name = "OpenDotTest"
+=======
+rootProject.name = "opendot-n"
+>>>>>>> 0622b3a (login plus location)
 include ':app'

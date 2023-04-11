@@ -1,6 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
+<<<<<<< HEAD
     <style name="Theme.OpenDotTest" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+=======
+    <style name="Theme.opendot_n" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+>>>>>>> 0622b3a (login plus location)
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/coral</item>
         <item name="colorPrimaryVariant">@color/coral_faded</item>

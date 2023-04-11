@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+=======
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+>>>>>>> 0622b3a (login plus location)
 
     <application
         android:allowBackup="true"
@@ -13,6 +21,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:theme="@style/Theme.OpenDotTest"
         tools:targetApi="31">
         <activity
@@ -69,6 +78,58 @@
 
 
 
+=======
+        android:theme="@style/Theme.opendot_n"
+        tools:targetApi="31">
+        <activity
+            android:name="com.example.opendot_n.startloginregister.RegisterPage"
+            android:exported="false" />
+        <activity
+            android:name="com.example.opendot_n.startloginregister.LoginPage"
+            android:exported="false" />
+        <activity
+            android:name="com.example.opendot_n.startloginregister.StartPage"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.opendot_n.homeSwipe"
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity
+            android:name="com.example.opendot_n.createActions.CreateMenu"
+            android:exported="true" />
+        <activity
+            android:name="com.example.opendot_n.createActions.CreateLocation"
+            android:exported="true" />
+        <activity
+            android:name="com.example.opendot_n.createActions.CreateReview"
+            android:exported="true" />
+        <activity
+            android:name="com.example.opendot_n.createActions.CreateCollection"
+            android:exported="true" />
+        <activity
+            android:name="com.example.opendot_n.profile.profilePage"
+            android:exported="true" />
+        <activity
+            android:name="com.example.opendot_n.navBar"
+            android:exported="true" />
+        <activity
+            android:name="com.example.opendot_n.Review"
+            android:exported="true" />
+        <activity
+            android:name="com.example.opendot_n.Location.AddLocation"
+            android:exported="true" />
+>>>>>>> 0622b3a (login plus location)
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
